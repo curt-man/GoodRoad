@@ -93,6 +93,7 @@ namespace GoodRoad.Controllers
         #endregion
 
         #region POST
+
         [HttpPost]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -118,24 +119,27 @@ namespace GoodRoad.Controllers
                 if (problem.Length == 0)
                 {
                     var imageUploadResult = await _photoService.AddPhotoAsync(holeInputModel.Image);
-
-                    var hole = new Hole()
+                    if (imageUploadResult != null)
                     {
-                        Name = holeInputModel.Name,
-                        Description = holeInputModel.Description,
-                        Size = holeInputModel.Size,
-                        Address = holeInputModel.Address,
-                        Contributor = holeInputModel.Contributor,
-                        Coordinates = holeInputModel.Coordinates,
-                        CreatedAt = DateTime.Now,
-                        ImageUrl = imageUploadResult.Url.ToString(),
-                        ImageId = imageUploadResult.PublicId.ToString(),
-                    };
 
-                    if (_holeRepository.CreateHole(hole))
-                    {
-                        return Ok("Successfully created");
+                        var hole = new Hole()
+                        {
+                            Name = holeInputModel.Name,
+                            Description = holeInputModel.Description,
+                            Size = holeInputModel.Size,
+                            Address = holeInputModel.Address,
+                            Contributor = holeInputModel.Contributor,
+                            Coordinates = holeInputModel.Coordinates,
+                            CreatedAt = DateTime.Now,
+                            ImageUrl = imageUploadResult.Url.ToString(),
+                            ImageId = imageUploadResult.PublicId.ToString(),
+                        };
 
+                        if (_holeRepository.CreateHole(hole))
+                        {
+                            return Ok("Successfully created");
+
+                        }
                     }
                     ModelState.AddModelError("SaveProblem", "Something went wrong while saving");
                     return StatusCode(500, ModelState);
@@ -147,6 +151,73 @@ namespace GoodRoad.Controllers
             }
             return BadRequest(ModelState);
         }
+
+        //[HttpPost]
+        //[ProducesResponseType(204)]
+        //[ProducesResponseType(400)]
+        //public async Task<IActionResult> UpdateHole([FromBody] HoleInputModel holeInputModel)
+        //{
+        //    if (holeInputModel is not null)
+        //    {
+        //        string problem = string.Empty;
+        //        if (_holeRepository.GetHoles().Any(x => (x.Name == holeInputModel.Name && x.Id != holeInputModel.Id)))
+        //        {
+        //            problem = "Hole with similar name already exist";
+        //        }
+        //        if (_holeRepository.GetHoles().Any(x => x.Coordinates.Latitude == holeInputModel.Coordinates.Latitude &&
+        //                                      x.Coordinates.Longitude == holeInputModel.Coordinates.Longitude && x.Id != holeInputModel.Id))
+        //        {
+        //            problem = "Hole with similar coordinates already exist";
+        //        }
+        //        //if (holeInputModel.Image == hole2.Image)
+        //        //{
+        //        //    problem = "Holes have similar images";
+        //        //}
+
+        //        if (problem.Length == 0)
+        //        {
+        //            var hole = _holeRepository.GetHole(holeInputModel.Id);
+        //            if (holeInputModel.Image is not null)
+        //            {
+        //                var imageUploadResult = await _photoService.AddPhotoAsync(holeInputModel.Image);
+        //                if (imageUploadResult.Error is not null)
+        //                {
+        //                    ModelState.AddModelError("Image", "Photo upload failed");
+        //                    return StatusCode(500, ModelState);
+        //                }
+
+        //                _ = _photoService.DeletePhotoAsync(hole.ImageId);
+
+        //                hole.ImageUrl = imageUploadResult.Url.ToString();
+        //                hole.ImageId = imageUploadResult.PublicId.ToString();
+        //            }
+
+
+        //            hole.Name = holeInputModel.Name;
+        //            hole.Description = holeInputModel.Description;
+        //            hole.Size = holeInputModel.Size;
+        //            hole.Address = holeInputModel.Address;
+        //            hole.Contributor = holeInputModel.Contributor;
+        //            hole.Coordinates = holeInputModel.Coordinates;
+
+
+        //            if (_holeRepository.UpdateHole(hole))
+        //            {
+        //                return Ok("Successfully updated");
+
+        //            }
+        //            ModelState.AddModelError("SaveProblem", "Something went wrong while saving");
+        //            return StatusCode(500, ModelState);
+        //        }
+
+        //        ModelState.AddModelError("AlreadyExist", problem);
+        //        return StatusCode(422, holeInputModel);
+
+        //    }
+        //    return BadRequest(ModelState);
+        //}
+
+
         #endregion
 
 

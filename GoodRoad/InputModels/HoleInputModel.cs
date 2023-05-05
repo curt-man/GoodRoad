@@ -10,11 +10,11 @@ namespace GoodRoad.InputModels
         public string? Name { get; set; }
         public string? Description { get; set; }
         public int NumberOfLikes { get; set; }
-        public string? Size { get; set; }
+        public Size Size { get; set; }
 
         public Address? Address { get; set; }
 
-        public AppUser Contributor { get; set; }
+        public AppUser? Contributor { get; set; }
 
         public Coordinates? Coordinates { get; set; }
 

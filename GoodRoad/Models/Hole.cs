@@ -1,5 +1,6 @@
 ﻿using GoodRoad.Data.Enums;
 using GoodRoad.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,11 +17,12 @@ namespace GoodRoad.Models
 
         public int? AddressId { get; set; }
         [ForeignKey("AddressId")]
+        [ValidateNever]
         public Address? Address { get; set; }
 
         public string ContributorId { get; set; }
         [ForeignKey("ContributorId")]
-        public AppUser Contributor { get; set; }
+        public AppUser? Contributor { get; set; }
 
         public int? CoordinatesId { get; set; }
         [ForeignKey("CoordinatesId")]
