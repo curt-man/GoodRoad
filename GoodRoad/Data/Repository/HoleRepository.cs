@@ -17,6 +17,11 @@ namespace GoodRoad.Data.Repository
             return _dbContext.Holes.FirstOrDefault(x => x.Id == id);
         }
 
+        public int GetHoleLikes(int id)
+        {
+            return _dbContext.Holes.FirstOrDefault(x => x.Id == id).NumberOfLikes;
+        }
+
         public ICollection<Hole> GetHoles()
         {
             return _dbContext.Holes.OrderBy(p=>p.Id).ToList();

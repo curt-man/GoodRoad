@@ -26,11 +26,11 @@ namespace GoodRoad.Controllers
             return BadRequest();
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(Coordinates))]
         public IActionResult GetCoordinate(int id)
         {
-            var coordinates = _coordinatesRepository.GetCoordinates(id);
+            var coordinates = _coordinatesRepository.GetCoordinate(id);
             if(ModelState.IsValid)
             {
                 return Ok(coordinates);

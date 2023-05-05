@@ -12,7 +12,7 @@ namespace GoodRoad.Data.Repository
             _dbContext = dbContext;
         }
 
-        public Coordinates GetCoordinates(int id)
+        public Coordinates GetCoordinate(int id)
         {
             return _dbContext.Coordinates.FirstOrDefault(x => x.Id == id);
         }

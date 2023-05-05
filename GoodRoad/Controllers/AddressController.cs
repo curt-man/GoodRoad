@@ -26,7 +26,7 @@ namespace GoodRoad.Controllers
             return BadRequest();
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(Address))]
         public IActionResult GetAddress(int id)
         {

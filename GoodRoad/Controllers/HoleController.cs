@@ -16,7 +16,7 @@ namespace GoodRoad.Controllers
 
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Hole>))]
-        public IActionResult GetComments()
+        public IActionResult GetHoles()
         {
             var holes = _holeRepository.GetHoles();
             if(ModelState.IsValid)
@@ -26,7 +26,7 @@ namespace GoodRoad.Controllers
             return BadRequest();
         }
 
-        [HttpGet]
+        [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(Hole))]
         public IActionResult GetHole(int id)
         {
@@ -34,6 +34,18 @@ namespace GoodRoad.Controllers
             if(ModelState.IsValid)
             {
                 return Ok(hole);
+            }
+            return BadRequest();
+        }
+
+        [HttpGet("{id}/likes")]
+        [ProducesResponseType(200, Type = typeof(int))]
+        public IActionResult GetHoleLikes(int id)
+        {
+            var holeLikes = _holeRepository.GetHoleLikes(id);
+            if (ModelState.IsValid)
+            {
+                return Ok(holeLikes);
             }
             return BadRequest();
         }

@@ -7,6 +7,6 @@ namespace GoodRoad.Data.Repository.IRepository
         
         ICollection<Hole> GetHoles();
         Hole GetHole(int id);
-
+        int GetHoleLikes(int id);
     }
 }

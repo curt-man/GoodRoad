@@ -6,7 +6,7 @@ namespace GoodRoad.Data.Repository.IRepository
     {
         
         ICollection<Coordinates> GetCoordinates();
-        Coordinates GetCoordinates(int id);
+        Coordinates GetCoordinate(int id);
 
     }
 }
