@@ -1,4 +1,5 @@
 ﻿using GoodRoad.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GoodRoad.Data.Repository.IRepository
 {
@@ -6,7 +7,17 @@ namespace GoodRoad.Data.Repository.IRepository
     {
         
         ICollection<Hole> GetHoles();
+        ICollection<Hole> GetHolesByCity(string city);
+        ICollection<Hole> GetHolesByState(string state);
+        ICollection<Hole> GetHolesByStreet(string street);
         Hole GetHole(int id);
         int GetHoleLikes(int id);
+
+        bool CreateHole(Hole hole);
+        bool UpdateHole(Hole hole);
+        bool DeleteHole(int id);
+
+
+        bool Save();
     }
 }

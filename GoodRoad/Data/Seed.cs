@@ -41,7 +41,8 @@ namespace GoodRoad.Data
                             },
                             CreatedAt = new DateTime(2022, 4, 1),
                             FixedAt = new DateTime(2022, 4, 15),
-                            Image = "https://www.example.com/gorgeous-greens.jpg"
+                            ImageUrl = "https://www.example.com/gorgeous-greens.jpg",
+                            ImageId = "gorgeous-greens.jpg"
                             },
 
                         new Hole()
@@ -64,7 +65,9 @@ namespace GoodRoad.Data
                             },
                             CreatedAt = new DateTime(2022, 3, 15),
                             FixedAt = new DateTime(2022, 3, 30),
-                            Image = "https://www.example.com/rocky-ravine.jpg"
+                            ImageUrl = "https://www.example.com/rocky-ravine.jpg",
+                            ImageId = "rocky-ravine.jpg"
+                            
                         },
 
                         new Hole()
@@ -87,7 +90,8 @@ namespace GoodRoad.Data
                             },
                             CreatedAt = new DateTime(2022, 5, 1),
                             FixedAt = new DateTime(2022, 5, 15),
-                            Image = "https://www.example.com/seaside-six.jpg",
+                            ImageUrl = "https://www.example.com/seaside-six.jpg",
+                            ImageId = "seaside-six.jpg",
                             
                             },
 
@@ -112,7 +116,8 @@ namespace GoodRoad.Data
                             },
                             CreatedAt = new DateTime(2022, 6, 1),
                             FixedAt = new DateTime(2022, 6, 15),
-                            Image = "https://www.example.com/mountain-view.jpg"
+                            ImageUrl = "https://www.example.com/mountain-view.jpg",
+                            ImageId = "mountain-view.jpg"
                         }
                     });
 
@@ -197,7 +202,8 @@ namespace GoodRoad.Data
                         NumberOfHoles = 3,
                         NumberOfComments = 21,
                         CreatedAt = DateTime.Now,
-                        Image = "https://www.example.com/mountain-view.jpg"
+                        ImageUrl = "https://www.example.com/mountain-view.jpg",
+                        ImageId = "mountain-view.jpg"
                     };
                     await userManager.CreateAsync(newAdminUser, "test123Z.");
                     await userManager.AddToRoleAsync(newAdminUser, UserRoles.Admin);
@@ -216,7 +222,8 @@ namespace GoodRoad.Data
                         NumberOfHoles = 3,
                         NumberOfComments = 21,
                         CreatedAt = DateTime.Now,
-                        Image = "https://www.example.com/mountain-view.jpg"
+                        ImageUrl = "https://www.example.com/mountain-view.jpg",
+                        ImageId = "mountain-view.jpg"
 
                     };
                     await userManager.CreateAsync(newAppUser, "test123Z.");

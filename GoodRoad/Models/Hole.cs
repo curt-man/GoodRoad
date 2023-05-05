@@ -28,7 +28,9 @@ namespace GoodRoad.Models
 
         public DateTime CreatedAt { get; set; }
         public DateTime FixedAt { get; set; }
-        public string? Image { get; set; }
+
+        public string? ImageUrl { get; set; }
+        public string? ImageId { get; set; }
 
         public ICollection<Comment>? Comments { get; set; }
     }

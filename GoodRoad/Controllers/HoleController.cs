@@ -1,6 +1,10 @@
 ﻿using GoodRoad.Data.Repository.IRepository;
+using GoodRoad.InputModels;
+using GoodRoad.Interfaces;
 using GoodRoad.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoodRoad.Controllers
 {
@@ -9,17 +13,54 @@ namespace GoodRoad.Controllers
     public class HoleController : Controller
     {
         private readonly IHoleRepository _holeRepository;
-        public HoleController(IHoleRepository holeRepository)
+        private readonly IPhotoService _photoService;
+        public HoleController(IHoleRepository holeRepository, IPhotoService photoService)
         {
             _holeRepository = holeRepository;
+            _photoService = photoService;
         }
 
+
+        #region GET
         [HttpGet]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Hole>))]
         public IActionResult GetHoles()
         {
             var holes = _holeRepository.GetHoles();
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
+            {
+                return Ok(holes);
+            }
+            return BadRequest();
+        }
+        [HttpGet("state/{state}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Hole>))]
+        public IActionResult GetHolesByState(string state)
+        {
+            var holes = _holeRepository.GetHolesByState(state);
+            if (ModelState.IsValid)
+            {
+                return Ok(holes);
+            }
+            return BadRequest();
+        }
+        [HttpGet("city/{city}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Hole>))]
+        public IActionResult GetHolesByCity(string city)
+        {
+            var holes = _holeRepository.GetHolesByCity(city);
+            if (ModelState.IsValid)
+            {
+                return Ok(holes);
+            }
+            return BadRequest();
+        }
+        [HttpGet("street/{street}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Hole>))]
+        public IActionResult GetHolesByStreet(string street)
+        {
+            var holes = _holeRepository.GetHolesByStreet(street);
+            if (ModelState.IsValid)
             {
                 return Ok(holes);
             }
@@ -31,7 +72,7 @@ namespace GoodRoad.Controllers
         public IActionResult GetHole(int id)
         {
             var hole = _holeRepository.GetHole(id);
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 return Ok(hole);
             }
@@ -49,5 +90,65 @@ namespace GoodRoad.Controllers
             }
             return BadRequest();
         }
+        #endregion
+
+        #region POST
+        [HttpPost]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(400)]
+        public async Task<IActionResult> CreateHole([FromBody] HoleInputModel holeInputModel)
+        {
+            if (holeInputModel is not null)
+            {
+                string problem = string.Empty;
+                if (_holeRepository.GetHoles().Any(x => x.Name == holeInputModel.Name))
+                {
+                    problem = "Hole with similar name already exist";
+                }
+                if (_holeRepository.GetHoles().Any(x => x.Coordinates.Latitude == holeInputModel.Coordinates.Latitude &&
+                                              x.Coordinates.Longitude == holeInputModel.Coordinates.Longitude))
+                {
+                    problem = "Hole with similar coordinates already exist";
+                }
+                //if (holeInputModel.Image == hole2.Image)
+                //{
+                //    problem = "Holes have similar images";
+                //}
+
+                if (problem.Length == 0)
+                {
+                    var imageUploadResult = await _photoService.AddPhotoAsync(holeInputModel.Image);
+
+                    var hole = new Hole()
+                    {
+                        Name = holeInputModel.Name,
+                        Description = holeInputModel.Description,
+                        Size = holeInputModel.Size,
+                        Address = holeInputModel.Address,
+                        Contributor = holeInputModel.Contributor,
+                        Coordinates = holeInputModel.Coordinates,
+                        CreatedAt = DateTime.Now,
+                        ImageUrl = imageUploadResult.Url.ToString(),
+                        ImageId = imageUploadResult.PublicId.ToString(),
+                    };
+
+                    if (_holeRepository.CreateHole(hole))
+                    {
+                        return Ok("Successfully created");
+
+                    }
+                    ModelState.AddModelError("SaveProblem", "Something went wrong while saving");
+                    return StatusCode(500, ModelState);
+                }
+
+                ModelState.AddModelError("AlreadyExist", problem);
+                return StatusCode(422, holeInputModel);
+
+            }
+            return BadRequest(ModelState);
+        }
+        #endregion
+
+
     }
 }

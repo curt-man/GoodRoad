@@ -8,7 +8,9 @@ namespace GoodRoad.Models
         public int NumberOfHoles { get; set; }
         public int NumberOfComments { get; set; }
         public DateTime CreatedAt { get; set; }
-        public string Image { get; set; }
+
+        public string? ImageUrl { get; set; }
+        public string? ImageId { get; set; }
 
         public ICollection<Hole>? Holes { get; set; }
         public ICollection<Comment>? Comments { get; set; }
