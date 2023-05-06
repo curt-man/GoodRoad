@@ -32,7 +32,7 @@ namespace GoodRoad.Data
                             City = "Chicago",
                             State = "IL"
                             },
-                            ContributorId = "546c9eb0-9f33-4774-87a0-4c0d24d37cdd",
+                            //ContributorId = "546c9eb0-9f33-4774-87a0-4c0d24d37cdd",
                             Coordinates = new Coordinates()
                             {
                             Latitude = 41.881832,
@@ -57,7 +57,7 @@ namespace GoodRoad.Data
                             City = "Denver",
                             State = "CO"
                             },
-                            ContributorId = "546c9eb0-9f33-4774-87a0-4c0d24d37cdd",
+                            //ContributorId = "546c9eb0-9f33-4774-87a0-4c0d24d37cdd",
                             Coordinates = new Coordinates()
                             {
                             Latitude = 39.739236,
@@ -82,7 +82,7 @@ namespace GoodRoad.Data
                             City = "Miami",
                             State = "FL"
                             },
-                            ContributorId = "b23d9d20-e626-46ec-b21f-af7af707246a",
+                            //ContributorId = "b23d9d20-e626-46ec-b21f-af7af707246a",
                             Coordinates = new Coordinates()
                             {
                             Latitude = 25.761681,
@@ -108,7 +108,7 @@ namespace GoodRoad.Data
                             City = "Aspen",
                             State = "CO"
                             },
-                            ContributorId = "b23d9d20-e626-46ec-b21f-af7af707246a",
+                            //ContributorId = "b23d9d20-e626-46ec-b21f-af7af707246a",
                             Coordinates = new Coordinates()
                             {
                             Latitude = 39.191097,
@@ -133,40 +133,40 @@ namespace GoodRoad.Data
                             Text = "Great job!",
                             CreatedAt = DateTime.UtcNow,
                             NumberOfLikes = 10,
-                            OwnerId = "546c9eb0-9f33-4774-87a0-4c0d24d37cdd",
-                            HoleId = 2
+                            //OwnerId = "546c9eb0-9f33-4774-87a0-4c0d24d37cdd",
+                            //HoleId = 2
                         },
                         new Comment()
                         {
                             Text = "Love it!",
                             CreatedAt = DateTime.UtcNow,
                             NumberOfLikes = 5,
-                            OwnerId = "b23d9d20-e626-46ec-b21f-af7af707246a",
-                            HoleId = 3
+                            //OwnerId = "b23d9d20-e626-46ec-b21f-af7af707246a",
+                            //HoleId = 3
                         },
                         new Comment()
                         {
                             Text = "Awesome hole!",
                             CreatedAt = DateTime.UtcNow,
                             NumberOfLikes = 20,
-                            OwnerId = "546c9eb0-9f33-4774-87a0-4c0d24d37cdd",
-                            HoleId = 4
+                            //OwnerId = "546c9eb0-9f33-4774-87a0-4c0d24d37cdd",
+                            //HoleId = 4
                         },
                         new Comment()
                         {
                             Text = "Fantastic!",
                             CreatedAt = DateTime.UtcNow,
                             NumberOfLikes = 7,
-                            OwnerId = "b23d9d20-e626-46ec-b21f-af7af707246a",
-                            HoleId = 5
+                            //OwnerId = "b23d9d20-e626-46ec-b21f-af7af707246a",
+                            //HoleId = 5
                         },
                         new Comment()
                         {
                             Text = "Well done!",
                             CreatedAt = DateTime.UtcNow,
                             NumberOfLikes = 3,
-                            OwnerId = "546c9eb0-9f33-4774-87a0-4c0d24d37cdd",
-                            HoleId = 2
+                            //OwnerId = "546c9eb0-9f33-4774-87a0-4c0d24d37cdd",
+                            //HoleId = 2
                         }
 
                     });
@@ -196,6 +196,8 @@ namespace GoodRoad.Data
                 {
                     var newAdminUser = new AppUser()
                     {
+                        Name = "admin",
+                        Surname = "admintos",
                         UserName = "admin",
                         Email = adminUserEmail,
                         EmailConfirmed = true,
@@ -216,6 +218,9 @@ namespace GoodRoad.Data
                 {
                     var newAppUser = new AppUser()
                     {
+                        Name = "app",
+                        Surname = "useros",
+
                         UserName = "app-user",
                         Email = appUserEmail,
                         EmailConfirmed = true,

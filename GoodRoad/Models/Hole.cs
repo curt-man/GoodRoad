@@ -20,12 +20,14 @@ namespace GoodRoad.Models
         [ValidateNever]
         public Address? Address { get; set; }
 
-        public string ContributorId { get; set; }
+        public string? ContributorId { get; set; }
         [ForeignKey("ContributorId")]
+        [ValidateNever]
         public AppUser? Contributor { get; set; }
 
         public int? CoordinatesId { get; set; }
         [ForeignKey("CoordinatesId")]
+        [ValidateNever]
         public Coordinates? Coordinates { get; set; }
 
         public DateTime CreatedAt { get; set; }

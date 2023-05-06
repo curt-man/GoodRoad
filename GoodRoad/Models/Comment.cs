@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoodRoad.Models
@@ -13,10 +14,12 @@ namespace GoodRoad.Models
 
         public string? OwnerId { get; set; }
         [ForeignKey("OwnerId")]
+        [ValidateNever]
         public AppUser? Owner { get; set; }
 
         public int? HoleId { get; set; }
         [ForeignKey("HoleId")]
+        [ValidateNever]
         public Hole? Hole { get; set; }
 
     }
