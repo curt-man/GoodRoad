@@ -23,25 +23,29 @@ namespace GoodRoad.Data.Repository
             return _dbContext.AppUsers.OrderBy(p=>p.Id).ToList();
         }
 
-
-        public bool CreateUser(AppUser appUser)
+        public ICollection<Hole> GetHolesByUser(string user)
         {
-            _dbContext.AppUsers.Add(appUser);
-            return Save();
+            return _dbContext.Holes.Include("Address").Where(x => x.ContributorId == user).Include("Coordinates").OrderBy(p => p.NumberOfLikes).ToList();
         }
 
-        public bool DeleteUser(AppUser appUser)
-        {
-            _dbContext.AppUsers.Remove(appUser);
-            return Save();
-        }
+        //public bool CreateUser(AppUser appUser)
+        //{
+        //    _dbContext.AppUsers.Add(appUser);
+        //    return Save();
+        //}
+
+        //public bool DeleteUser(AppUser appUser)
+        //{
+        //    _dbContext.AppUsers.Remove(appUser);
+        //    return Save();
+        //}
 
 
-        public bool UpdateUser(AppUser appUser)
-        {
-            _dbContext.AppUsers.Update(appUser);
-            return Save();
-        }
+        //public bool UpdateUser(AppUser appUser)
+        //{
+        //    _dbContext.AppUsers.Update(appUser);
+        //    return Save();
+        //}
 
         public bool Save()
         {

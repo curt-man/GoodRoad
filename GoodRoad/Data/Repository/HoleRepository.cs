@@ -1,6 +1,7 @@
 ﻿using GoodRoad.Data.Repository.IRepository;
 using GoodRoad.Models;
 using Microsoft.EntityFrameworkCore;
+using System.IO;
 
 namespace GoodRoad.Data.Repository
 {
@@ -67,5 +68,9 @@ namespace GoodRoad.Data.Repository
             return _dbContext.SaveChanges()!=0;
         }
 
+        public ICollection<Hole> GetHolesByUser(string user)
+        {
+            return _dbContext.AppUsers.Include("Holes").FirstOrDefault(x=>x.Id == user).Holes;
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace GoodRoad.Data.Repository.IRepository
         ICollection<Hole> GetHolesByCity(string city);
         ICollection<Hole> GetHolesByState(string state);
         ICollection<Hole> GetHolesByStreet(string street);
+        ICollection<Hole> GetHolesByUser(string user);
         Hole GetHole(int id);
         int GetHoleLikes(int id);
 

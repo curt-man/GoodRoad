@@ -67,6 +67,18 @@ namespace GoodRoad.Controllers
             return BadRequest();
         }
 
+        [HttpGet("user/{user}")]
+        [ProducesResponseType(200, Type = typeof(IEnumerable<Hole>))]
+        public IActionResult GetHolesByUser(string user)
+        {
+            var holes = _holeRepository.GetHolesByUser(user);
+            if (ModelState.IsValid)
+            {
+                return Ok(holes);
+            }
+            return BadRequest();
+        }
+
         [HttpGet("{id}")]
         [ProducesResponseType(200, Type = typeof(Hole))]
         public IActionResult GetHole(int id)

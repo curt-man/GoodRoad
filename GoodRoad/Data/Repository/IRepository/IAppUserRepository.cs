@@ -6,11 +6,12 @@ namespace GoodRoad.Data.Repository.IRepository
     {
         ICollection<AppUser> GetUsers();
         AppUser GetUser(string id);
-       
-        bool CreateUser(AppUser user);
-        bool UpdateUser(AppUser user);
-        bool DeleteUser(AppUser user);
-        
+        ICollection<Hole> GetHolesByUser(string user);
+
+        //bool CreateUser(AppUser user);
+        //bool UpdateUser(AppUser user);
+        //bool DeleteUser(AppUser user);
+
         bool Save();
     }
 }
